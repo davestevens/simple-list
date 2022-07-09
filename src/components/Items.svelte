@@ -1,13 +1,22 @@
 <script lang="ts">
-  import { onDestroy } from "svelte";
+  import { onDestroy, onMount, setContext } from "svelte";
   import type { IListItem } from "../types";
   import { list } from "../stores/list";
   import Item from "./Item.svelte";
 
   let items: IListItem[];
+  let isInitialized = false;
 
   const unsubscribe = list.subscribe((value) => {
     items = value;
+  });
+
+  setContext("items", {
+    isInitialized: () => isInitialized,
+  });
+
+  onMount(() => {
+    isInitialized = true;
   });
 
   onDestroy(unsubscribe);

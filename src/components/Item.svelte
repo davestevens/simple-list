@@ -4,17 +4,24 @@
   export let color: string;
   export let index: number;
 
+  import { onMount, getContext } from "svelte";
   import { FontAwesomeIcon } from "fontawesome-svelte";
   import { list } from "../stores/list";
   import oppositeColor from "../services/oppositeColor";
+  const { isInitialized } = getContext("items");
 
+  let liElement: HTMLLIElement;
   $: foregroundColor = oppositeColor(color);
 
   const handleClick = () => {
-    if (confirm("delete")) {
-      list.removeItem(index);
-    }
+    list.removeItem(index);
   }
+
+  onMount(() => {
+    if (isInitialized()) {
+      liElement.scrollIntoView({ behavior: "smooth" });
+    }
+  })
 </script>
 
 <style>
@@ -69,7 +76,7 @@
   }
 </style>
 
-<li>
+<li bind:this={liElement}>
   <div class="icon" style="background-color: {color}; color: {foregroundColor}">
     {label.substring(0, 2)}
   </div>
