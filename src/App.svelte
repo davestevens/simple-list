@@ -13,16 +13,10 @@
     flex-direction: column;
     justify-content: space-between;
   }
-
-  .disabled {
-    filter: blur(0.25rem);
-    overflow: hidden;
-    pointer-events: none;
-  }
 </style>
 
-<main class:disabled={false}>
-  <Modal classWindow="disabled">
+<main>
+  <Modal>
     <Items />
     <BottomBar>
       <AddButton />
