@@ -18,6 +18,19 @@ const createList = () => {
         return [...current, { label: label.trim(), info, color: randomColor() }];
       });
     },
+    getItem: (index: number): IListItem => {
+      let $current: IListItem[];
+      subscribe($ => $current = $)();
+      return $current.find((_, i) => i === index);
+    },
+    updateItem: (index: number, label: string, info: string): void => {
+      update((current) => {
+        const item = current.find((_, i) => i === index);
+        item.label = label;
+        item.info = info;
+        return [...current];
+      });
+    },
     removeItem: (index: number): void => {
       update((current) => current.filter((_, i) => i !== index));
     },

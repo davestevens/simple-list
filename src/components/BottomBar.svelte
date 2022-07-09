@@ -5,7 +5,7 @@
   nav {
     width: 100%;
     height: 4rem;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
     background-color: grey;
     color: #fff;
   }

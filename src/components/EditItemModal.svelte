@@ -1,15 +1,24 @@
 <script lang="ts">
+  export let index: number;
   import { getContext } from "svelte";
   import { FontAwesomeIcon } from "fontawesome-svelte";
   import { list } from "../stores/list";
   const { close } = getContext("simple-modal");
 
-  let label: string = "";
-  let info: string = "";
+  const item = list.getItem(index);
+  let label: string = item.label;
+  let info: string = item.info;
 
-  const handleSave = () => {
+  const handleEdit = () => {
     if (label.trim()) {
-      list.addItem(label, info);
+      list.updateItem(index, label, info);
+      close();
+    }
+  }
+
+  const handleDeleteClick = () => {
+    if (confirm('Are you sure?')) {
+      list.removeItem(index);
       close();
     }
   }
@@ -26,6 +35,11 @@
     color: white;
   }
 
+  button.delete {
+    background-color: red;
+    color: white;
+  }
+
   input, textarea, button {
     font-size: inherit;
   }
@@ -37,8 +51,8 @@
 </style>
 
 <template>
-  <h1>Add new item</h1>
-  <form on:submit|preventDefault={handleSave}>
+  <h1>Edit Item</h1>
+  <form on:submit|preventDefault={handleEdit}>
     <div>
       <!-- svelte-ignore a11y-autofocus -->
       <input id="label" type="text" bind:value={label} autofocus />
@@ -49,6 +63,9 @@
       <textarea id="info" bind:value={info}></textarea>
     </div>
     <div class="controls">
+      <button class="delete" on:click|preventDefault={handleDeleteClick}>
+        <FontAwesomeIcon icon="trash-can" />
+      </button>
       <button class="save" type="submit">
         <FontAwesomeIcon icon="floppy-disk" />
       </button>

@@ -8,13 +8,20 @@
   import { FontAwesomeIcon } from "fontawesome-svelte";
   import { list } from "../stores/list";
   import oppositeColor from "../services/oppositeColor";
+  import EditItemModal from "./EditItemModal.svelte";
+
   const { isInitialized } = getContext("items");
+  const { open } = getContext("simple-modal");
 
   let liElement: HTMLLIElement;
   $: foregroundColor = oppositeColor(color);
 
-  const handleClick = () => {
+  const handleDeleteClick = () => {
     list.removeItem(index);
+  }
+
+  const handleEditClick = () => {
+    open(EditItemModal, { index });
   }
 
   onMount(() => {
@@ -77,7 +84,11 @@
 </style>
 
 <li bind:this={liElement}>
-  <div class="icon" style="background-color: {color}; color: {foregroundColor}">
+  <div
+    class="icon"
+    style="background-color: {color}; color: {foregroundColor}"
+    on:click={handleEditClick}
+  >
     {label.substring(0, 2)}
   </div>
   <div class="content">
@@ -85,7 +96,7 @@
     <div class="info">{info}</div>
   </div>
   <div class="controls">
-    <button on:click={handleClick}>
+    <button on:click={handleDeleteClick}>
       <FontAwesomeIcon icon="trash-can" />
     </button>
   </div>
