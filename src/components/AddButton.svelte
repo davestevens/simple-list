@@ -1,5 +1,6 @@
 <script lang="ts">
   export let onAdd: Function;
+  import { FontAwesomeIcon } from 'fontawesome-svelte';
 
   const handleClick = () => {
     onAdd();
@@ -10,7 +11,7 @@
   button {
     width: 4rem;
     height: 4rem;
-    background-color: #000;
+    background-color: blue;
     color: white;
     border-radius: 50%;
     border: none;
@@ -18,4 +19,6 @@
   }
 </style>
 
-<button on:click={handleClick}>➕</button>
+<button on:click={handleClick}>
+  <FontAwesomeIcon icon="plus" />
+</button>

@@ -4,6 +4,7 @@
   export let color: string;
   export let index: number;
 
+  import { FontAwesomeIcon } from 'fontawesome-svelte';
   import { list } from "../stores/list";
   import oppositeColor from "../services/oppositeColor";
 
@@ -75,6 +76,8 @@
     <div class="info">{info}</div>
   </div>
   <div class="controls">
-    <button on:click={handleClick}>❌</button>
+    <button on:click={handleClick}>
+      <FontAwesomeIcon icon="trash-can" />
+    </button>
   </div>
 </li>
