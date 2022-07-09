@@ -1,18 +1,8 @@
 <script lang="ts">
+  import Modal from 'svelte-simple-modal';
   import Items from "./components/Items.svelte";
   import AddButton from "./components/AddButton.svelte";
-  import NewItemModal from "./components/NewItemModal.svelte";
-import BottomBar from "./components/BottomBar.svelte";
-
-  let showNewItemModal: boolean = false;
-
-  const handleOpen = () => {
-    showNewItemModal = true;
-  }
-
-  const handleClose = () => {
-    showNewItemModal = false;
-  }
+  import BottomBar from "./components/BottomBar.svelte";
 </script>
 
 <style>
@@ -31,12 +21,11 @@ import BottomBar from "./components/BottomBar.svelte";
   }
 </style>
 
-<main class:disabled={showNewItemModal}>
-  <Items />
-  <BottomBar>
-    <AddButton onAdd={handleOpen} />
-  </BottomBar>
+<main class:disabled={false}>
+  <Modal classWindow="disabled">
+    <Items />
+    <BottomBar>
+      <AddButton />
+    </BottomBar>
+  </Modal>
 </main>
-{#if showNewItemModal}
-  <NewItemModal onCreated={handleClose} />
-{/if}

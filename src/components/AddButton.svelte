@@ -1,10 +1,10 @@
 <script lang="ts">
-  export let onAdd: Function;
   import { FontAwesomeIcon } from 'fontawesome-svelte';
+  import { getContext } from 'svelte';
+  import NewItemModal from './NewItemModal.svelte';
+  const { open } = getContext('simple-modal');
 
-  const handleClick = () => {
-    onAdd();
-  }
+  const handleClick = () => open(NewItemModal);
 </script>
 
 <style>
