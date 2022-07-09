@@ -2,6 +2,7 @@
   import Items from "./components/Items.svelte";
   import AddButton from "./components/AddButton.svelte";
   import NewItemModal from "./components/NewItemModal.svelte";
+import BottomBar from "./components/BottomBar.svelte";
 
   let showNewItemModal: boolean = false;
 
@@ -16,8 +17,11 @@
 
 <style>
   main {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .disabled {
@@ -29,7 +33,9 @@
 
 <main class:disabled={showNewItemModal}>
   <Items />
-  <AddButton onAdd={handleOpen} />
+  <BottomBar>
+    <AddButton onAdd={handleOpen} />
+  </BottomBar>
 </main>
 {#if showNewItemModal}
   <NewItemModal onCreated={handleClose} />

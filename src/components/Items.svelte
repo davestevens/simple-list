@@ -19,7 +19,7 @@
     list-style: none;
     margin: 0 auto;
     padding: 0;
-    overflow: hidden;
+    overflow: auto;
   }
 
   .empty {
