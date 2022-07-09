@@ -13,12 +13,12 @@ const createList = () => {
 
   return {
     subscribe,
-    addActivity: (label: string, info: string): void => {
+    addItem: (label: string, info: string): void => {
       update((current) => {
         return [...current, { label, info, color: randomColor() }];
       });
     },
-    removeActivity: (index: number): void => {
+    removeItem: (index: number): void => {
       update((current) => current.filter((_, i) => i !== index));
     },
   };

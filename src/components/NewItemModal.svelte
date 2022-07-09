@@ -13,7 +13,7 @@
 
   const handleSave = () => {
     if (label.trim()) {
-      list.addActivity(label, info);
+      list.addItem(label, info);
     }
     onCreated();
   }
@@ -72,6 +72,7 @@
   <main>
     <h1>Add new item</h1>
     <div>
+      <!-- svelte-ignore a11y-autofocus -->
       <input id="label" type="text" bind:value={label} autofocus />
     </div>
     <div>

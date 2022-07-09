@@ -10,7 +10,7 @@
   $: foregroundColor = oppositeColor(color);
 
   const handleClick = () => {
-    list.removeActivity(index);
+    list.removeItem(index);
   }
 </script>
 
