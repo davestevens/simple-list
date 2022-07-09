@@ -15,7 +15,7 @@ const createList = () => {
     subscribe,
     addItem: (label: string, info: string): void => {
       update((current) => {
-        return [...current, { label, info, color: randomColor() }];
+        return [...current, { label: label.trim(), info, color: randomColor() }];
       });
     },
     removeItem: (index: number): void => {
