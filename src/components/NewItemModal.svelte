@@ -2,7 +2,7 @@
   import { getContext } from "svelte";
   import { FontAwesomeIcon } from "fontawesome-svelte";
   import { list } from "../stores/list";
-  const { close } = getContext('simple-modal');
+  const { close } = getContext("simple-modal");
 
   let label: string = "";
   let info: string = "";

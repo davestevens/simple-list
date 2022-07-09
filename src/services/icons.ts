@@ -1,9 +1,9 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faPlus,
   faTrashCan,
   faFloppyDisk,
-} from '@fortawesome/free-solid-svg-icons';
+} from "@fortawesome/free-solid-svg-icons";
 
 library.add(
   faPlus,

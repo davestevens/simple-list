@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Modal from 'svelte-simple-modal';
+  import Modal from "svelte-simple-modal";
   import Items from "./components/Items.svelte";
   import AddButton from "./components/AddButton.svelte";
   import BottomBar from "./components/BottomBar.svelte";

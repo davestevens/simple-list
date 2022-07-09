@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { FontAwesomeIcon } from 'fontawesome-svelte';
-  import { getContext } from 'svelte';
-  import NewItemModal from './NewItemModal.svelte';
-  const { open } = getContext('simple-modal');
+  import { FontAwesomeIcon } from "fontawesome-svelte";
+  import { getContext } from "svelte";
+  import NewItemModal from "./NewItemModal.svelte";
+  const { open } = getContext("simple-modal");
 
   const handleClick = () => open(NewItemModal);
 </script>

@@ -4,14 +4,14 @@
   export let color: string;
   export let index: number;
 
-  import { FontAwesomeIcon } from 'fontawesome-svelte';
+  import { FontAwesomeIcon } from "fontawesome-svelte";
   import { list } from "../stores/list";
   import oppositeColor from "../services/oppositeColor";
 
   $: foregroundColor = oppositeColor(color);
 
   const handleClick = () => {
-    if (confirm('delete')) {
+    if (confirm("delete")) {
       list.removeItem(index);
     }
   }
