@@ -19,6 +19,8 @@
 
 <style>
   li {
+    max-width: 40rem;
+    margin: 0 auto;
     padding: 0.5rem 1rem;
     border-bottom: 1px solid grey;
     display: flex;

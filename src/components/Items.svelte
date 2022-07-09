@@ -15,9 +15,9 @@
 
 <style>
   ul {
-    max-width: 40rem;
+    width: 100%;
     list-style: none;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     overflow: auto;
   }
