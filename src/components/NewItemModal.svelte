@@ -34,7 +34,7 @@
 
 <template>
   <h1>Add new item</h1>
-  <form on:submit={handleSave}>
+  <form on:submit|preventDefault={handleSave}>
     <div>
       <!-- svelte-ignore a11y-autofocus -->
       <input id="label" type="text" bind:value={label} autofocus />
