@@ -13,15 +13,13 @@
     right: 0;
     width: 4rem;
     height: 4rem;
-    background-color: blue;
+    background-color: #000;
     margin: 0 1rem 1rem 0;
     color: white;
     border-radius: 50%;
     border: none;
-    font-size: inherit;
+    font-size: 1rem;
   }
 </style>
 
-<button on:click={handleClick}>
-  +
-</button>
+<button on:click={handleClick}>➕</button>

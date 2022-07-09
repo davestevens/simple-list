@@ -10,7 +10,9 @@
   $: foregroundColor = oppositeColor(color);
 
   const handleClick = () => {
-    list.removeItem(index);
+    if (confirm('delete')) {
+      list.removeItem(index);
+    }
   }
 </script>
 
@@ -20,7 +22,6 @@
     border-bottom: 1px solid grey;
     display: flex;
     align-items: center;
-    position: relative;
   }
 
   li:first-of-type {
@@ -39,26 +40,41 @@
     border-radius: 50%;
     text-align: center;
     flex-shrink: 0;
-    margin-right: 0.5rem;
+  }
+
+  .content {
+    width: 100%;
+    margin: 0 0.5rem;
   }
 
   .label {
     font-weight: bold;
   }
 
+  .info {
+    font-weight: normal;
+  }
+
+  .controls {
+    display: block;
+  }
+
   button {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
   }
 </style>
 
 <li>
-  <div class="icon" style="background-color: {color}; color: {foregroundColor}">{label.substr(0, 2)}</div>
-  <div>
+  <div class="icon" style="background-color: {color}; color: {foregroundColor}">
+    {label.substring(0, 2)}
+  </div>
+  <div class="content">
     <div class="label">{label}</div>
     <div class="info">{info}</div>
-    <button on:click={handleClick}>x</button>
+  </div>
+  <div class="controls">
+    <button on:click={handleClick}>❌</button>
   </div>
 </li>
