@@ -15,7 +15,9 @@
   let liElement: HTMLLIElement;
 
   const handleDeleteClick = () => {
-    listsStore.removeList(index);
+    if (confirm('Are you sure?')) {
+      listsStore.removeList(index);
+    }
   }
 
   const handleEditClick = () => {
