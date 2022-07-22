@@ -6,8 +6,8 @@
 
   import { onMount, getContext } from "svelte";
   import { FontAwesomeIcon } from "fontawesome-svelte";
-  import { list } from "../stores/list";
-  import oppositeColor from "../services/oppositeColor";
+  import { getCurrentlySelectedList } from "../../services/currentlySelectedList";
+  import oppositeColor from "../../services/oppositeColor";
   import EditItemModal from "./EditItemModal.svelte";
 
   const { isInitialized } = getContext("items");
@@ -17,7 +17,7 @@
   $: foregroundColor = oppositeColor(color);
 
   const handleDeleteClick = () => {
-    list.removeItem(index);
+    getCurrentlySelectedList().removeItem(index);
   }
 
   const handleEditClick = () => {
@@ -73,13 +73,14 @@
   }
 
   .controls {
-    display: block;
+    display: flex;
   }
 
   button {
     background-color: transparent;
     border: none;
     font-size: 1rem;
+    cursor: pointer;
   }
 </style>
 
@@ -87,7 +88,6 @@
   <div
     class="icon"
     style="background-color: {color}; color: {foregroundColor}"
-    on:click={handleEditClick}
   >
     {label.substring(0, 2)}
   </div>
@@ -96,6 +96,9 @@
     <div class="info">{info}</div>
   </div>
   <div class="controls">
+    <button on:click={handleEditClick}>
+      <FontAwesomeIcon icon="pencil" />
+    </button>
     <button on:click={handleDeleteClick}>
       <FontAwesomeIcon icon="trash-can" />
     </button>

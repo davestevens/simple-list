@@ -13,6 +13,9 @@
     max-width: 40rem;
     padding: 0.5rem;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 </style>
 

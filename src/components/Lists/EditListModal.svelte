@@ -1,24 +1,24 @@
 <script lang="ts">
   export let index: number;
+
   import { getContext } from "svelte";
   import { FontAwesomeIcon } from "fontawesome-svelte";
-  import { list } from "../stores/list";
+  import { listsStore } from "../../stores/listsStore";
   const { close } = getContext("simple-modal");
 
-  const item = list.getItem(index);
+  const item = listsStore.getList(index);
   let label: string = item.label;
-  let info: string = item.info;
 
   const handleEdit = () => {
     if (label.trim()) {
-      list.updateItem(index, label, info);
+      listsStore.updateList(index, label);
       close();
     }
   }
 
   const handleDeleteClick = () => {
     if (confirm('Are you sure?')) {
-      list.removeItem(index);
+      listsStore.removeList(index);
       close();
     }
   }
@@ -40,7 +40,7 @@
     color: white;
   }
 
-  input, textarea, button {
+  input, button {
     font-size: inherit;
   }
 
@@ -51,16 +51,11 @@
 </style>
 
 <template>
-  <h1>Edit Item</h1>
+  <h1>Edit List</h1>
   <form on:submit|preventDefault={handleEdit}>
     <div>
       <!-- svelte-ignore a11y-autofocus -->
       <input id="label" type="text" bind:value={label} autofocus />
-    </div>
-    <div>
-      <label for="info">Notes</label>
-      <br/>
-      <textarea id="info" bind:value={info}></textarea>
     </div>
     <div class="controls">
       <button class="delete" on:click|preventDefault={handleDeleteClick}>

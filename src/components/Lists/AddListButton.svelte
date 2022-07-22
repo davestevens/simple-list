@@ -1,10 +1,10 @@
 <script lang="ts">
   import { FontAwesomeIcon } from "fontawesome-svelte";
   import { getContext } from "svelte";
-  import NewItemModal from "./NewItemModal.svelte";
+  import NewListModal from "./NewListModal.svelte";
   const { open } = getContext("simple-modal");
 
-  const handleClick = () => open(NewItemModal);
+  const handleClick = () => open(NewListModal);
 </script>
 
 <style>
@@ -16,6 +16,7 @@
     border-radius: 50%;
     border: none;
     font-size: 1rem;
+    cursor: pointer;
   }
 </style>
 

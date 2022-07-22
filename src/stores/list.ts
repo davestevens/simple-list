@@ -2,13 +2,15 @@ import { writable } from "svelte/store";
 import { LIST_KEY } from "../consts";
 import type { IListItem } from "../types";
 import randomColor from "../services/randomColor";
+import { buildListKey } from "../services/buildListKey";
 
-const createList = () => {
-  const initialValue = JSON.parse(localStorage.getItem(LIST_KEY)) || [];
+export const createList = (key: string = LIST_KEY) => {
+  const listKey = buildListKey(key);
+  const initialValue = JSON.parse(localStorage.getItem(listKey)) || [];
   const { update, subscribe } = writable<IListItem[]>(initialValue);
 
   subscribe((val) => {
-    localStorage.setItem(LIST_KEY, JSON.stringify(val));
+    localStorage.setItem(listKey, JSON.stringify(val));
   });
 
   return {
@@ -37,4 +39,8 @@ const createList = () => {
   };
 };
 
-export const list = createList();
+export const destroyList = (key: string) => {
+  const listKey = buildListKey(key);
+  localStorage.removeItem(listKey);
+};
+

@@ -1,8 +1,19 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
   import Modal from "svelte-simple-modal";
-  import Items from "./components/Items.svelte";
-  import AddButton from "./components/AddButton.svelte";
-  import BottomBar from "./components/BottomBar.svelte";
+  import List from "./views/List.svelte";
+  import Lists from "./views/Lists.svelte";
+  import { selectedListStore } from "./stores/selectedListStore";
+  import { updateCurrentlySelectedList } from "./services/currentlySelectedList";
+
+  let selectedList: string | null;
+
+  const unsubscribe = selectedListStore.subscribe((value) => {
+    updateCurrentlySelectedList(value);
+    selectedList = value;
+  });
+
+  onDestroy(unsubscribe);
 </script>
 
 <style>
@@ -17,9 +28,10 @@
 
 <main>
   <Modal>
-    <Items />
-    <BottomBar>
-      <AddButton />
-    </BottomBar>
+    {#if selectedList}
+      <List />
+    {:else}
+      <Lists />
+    {/if}
   </Modal>
 </main>

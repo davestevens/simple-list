@@ -1,15 +1,14 @@
 <script lang="ts">
   import { getContext } from "svelte";
   import { FontAwesomeIcon } from "fontawesome-svelte";
-  import { list } from "../stores/list";
+  import { listsStore } from "../../stores/listsStore";
   const { close } = getContext("simple-modal");
 
   let label: string = "";
-  let info: string = "";
 
   const handleSave = () => {
     if (label.trim()) {
-      list.addItem(label, info);
+      listsStore.addItem(label);
       close();
     }
   }
@@ -26,7 +25,7 @@
     color: white;
   }
 
-  input, textarea, button {
+  input, button {
     font-size: inherit;
   }
 
@@ -37,16 +36,11 @@
 </style>
 
 <template>
-  <h1>Add new item</h1>
+  <h1>Add new list</h1>
   <form on:submit|preventDefault={handleSave}>
     <div>
       <!-- svelte-ignore a11y-autofocus -->
       <input id="label" type="text" bind:value={label} autofocus />
-    </div>
-    <div>
-      <label for="info">Notes</label>
-      <br/>
-      <textarea id="info" bind:value={info}></textarea>
     </div>
     <div class="controls">
       <button class="save" type="submit">

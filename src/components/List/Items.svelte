@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onDestroy, onMount, setContext } from "svelte";
-  import type { IListItem } from "../types";
-  import { list } from "../stores/list";
+  import type { IListItem } from "../../types";
+  import { getCurrentlySelectedList } from "../../services/currentlySelectedList";
   import Item from "./Item.svelte";
 
   let items: IListItem[];
   let isInitialized = false;
 
-  const unsubscribe = list.subscribe((value) => {
+  const unsubscribe = getCurrentlySelectedList().subscribe((value) => {
     items = value;
   });
 
