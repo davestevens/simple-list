@@ -30,7 +30,10 @@
 </style>
 
 <main>
-  <Modal>
+  <Modal
+    unstyled={true}
+    closeButton={false}
+  >
     <NavBar title={selectedList?.label || "Simple List"} />
     <section>
       {#if selectedList}
