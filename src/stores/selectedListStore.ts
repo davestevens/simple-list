@@ -1,9 +1,10 @@
 import { writable } from "svelte/store";
 import { SELECTED_LIST_KEY } from "../consts";
+import type { ISelectedList } from "../types";
 
 const createSelectedListStore = () => {
   const initialValue = JSON.parse(localStorage.getItem(SELECTED_LIST_KEY)) || null;
-  const { update, subscribe } = writable<string | null>(initialValue);
+  const { update, subscribe } = writable<ISelectedList | null>(initialValue);
 
   subscribe((val) => {
     localStorage.setItem(SELECTED_LIST_KEY, JSON.stringify(val));
@@ -11,8 +12,8 @@ const createSelectedListStore = () => {
 
   return {
     subscribe,
-    select: (key: string): void => {
-      update(() => key);
+    select: (key: string, label: string): void => {
+      update(() => ({ key, label }));
     },
     clear: (): void => {
       update(() => null);

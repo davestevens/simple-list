@@ -1,6 +1,8 @@
 <script lang="ts">
   import { getContext } from "svelte";
-  import { FontAwesomeIcon } from "fontawesome-svelte";
+  import Dialog, { Title, Content, Actions } from "@smui/dialog";
+  import Textfield from '@smui/textfield';
+  import Button, { Icon, Label } from "@smui/button";
   import { getCurrentlySelectedList } from "../../services/currentlySelectedList";
   const { close } = getContext("simple-modal");
 
@@ -15,43 +17,36 @@
   }
 </script>
 
-<style>
-  button {
-    padding: 1rem;
-    border: none;
-  }
-
-  button.save {
-    background-color: blue;
-    color: white;
-  }
-
-  input, textarea, button {
-    font-size: inherit;
-  }
-
-  .controls {
-    display: flex;
-    justify-content: flex-end;
-  }
-</style>
-
 <template>
-  <h1>Add new item</h1>
-  <form on:submit|preventDefault={handleSave}>
-    <div>
-      <!-- svelte-ignore a11y-autofocus -->
-      <input id="label" type="text" bind:value={label} autofocus />
-    </div>
-    <div>
-      <label for="info">Notes</label>
-      <br/>
-      <textarea id="info" bind:value={info}></textarea>
-    </div>
-    <div class="controls">
-      <button class="save" type="submit">
-        <FontAwesomeIcon icon="floppy-disk" />
-      </button>
-    </div>
-  </form>
+  <Dialog
+    aria-labelledby="new-item-modal"
+    open={true}
+  >
+    <Title id="new-item-modal">Add Item</Title>
+    <form on:submit|preventDefault={handleSave}>
+      <Content id="simple-content">
+        <Textfield
+          type="text"
+          style="width: 100%; margin-bottom: 1rem;"
+          helperLine$style="width: 100%;"
+          bind:value={label}
+          label="Label"
+        />
+        <Textfield
+          type="text"
+          textarea
+          style="width: 100%; margin-bottom: 1rem;"
+          helperLine$style="width: 100%;"
+          bind:value={info}
+          label="Notes"
+        />
+      </Content>
+      <Actions>
+        <Button type="submit">
+          <Icon class="material-icons">save</Icon>
+          <Label>Create</Label>
+        </Button>
+      </Actions>
+    </form>
+  </Dialog>
 </template>

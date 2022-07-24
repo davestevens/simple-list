@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { FontAwesomeIcon } from "fontawesome-svelte";
+  import Fab, { Icon } from '@smui/fab';
   import { getContext } from "svelte";
   import NewItemModal from "./NewItemModal.svelte";
   const { open } = getContext("simple-modal");
@@ -8,18 +8,17 @@
 </script>
 
 <style>
-  button {
-    width: 4rem;
-    height: 4rem;
-    background-color: blue;
-    color: white;
-    border-radius: 50%;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
+  .add {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
   }
 </style>
 
-<button on:click={handleClick}>
-  <FontAwesomeIcon icon="plus" />
-</button>
+<template>
+  <div class="add">
+    <Fab on:click={handleClick}>
+      <Icon class="material-icons">add</Icon>
+    </Fab>
+  </div>
+</template>

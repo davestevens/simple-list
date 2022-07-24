@@ -1,5 +1,5 @@
 import App from "./App.svelte";
-import "./services/icons";
+import "svelte-material-ui/bare.css";
 
 const app = new App({ target: document.body });
 

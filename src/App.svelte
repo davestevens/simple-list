@@ -5,33 +5,39 @@
   import Lists from "./views/Lists.svelte";
   import { selectedListStore } from "./stores/selectedListStore";
   import { updateCurrentlySelectedList } from "./services/currentlySelectedList";
+  import NavBar from "./components/NavBar.svelte";
+  import type { ISelectedList } from "./types";
 
-  let selectedList: string | null;
+  let selectedList: ISelectedList | null;
 
   const unsubscribe = selectedListStore.subscribe((value) => {
-    updateCurrentlySelectedList(value);
+    updateCurrentlySelectedList(value?.key);
     selectedList = value;
   });
 
   onDestroy(unsubscribe);
 </script>
 
-<style>
+<style scoped>
   main {
     width: 100vw;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  }
+
+  section {
+    padding: 3rem 0 4rem 0;
   }
 </style>
 
 <main>
   <Modal>
-    {#if selectedList}
-      <List />
-    {:else}
-      <Lists />
-    {/if}
+    <NavBar title={selectedList?.label || "Simple List"} />
+    <section>
+      {#if selectedList}
+        <List />
+      {:else}
+        <Lists />
+      {/if}
+    </section>
   </Modal>
 </main>

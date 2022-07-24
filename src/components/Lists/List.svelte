@@ -3,89 +3,50 @@
   export let key: string;
   export let index: number;
 
-  import { onMount, getContext } from "svelte";
-  import { FontAwesomeIcon } from "fontawesome-svelte";
+  import { getContext } from "svelte";
+  import {
+    Item,
+    Meta,
+    Text,
+    PrimaryText,
+    SecondaryText,
+  } from '@smui/list';
+  import IconButton from '@smui/icon-button';
   import { listsStore } from "../../stores/listsStore";
   import { selectedListStore } from "../../stores/selectedListStore";
   import EditListModal from "./EditListModal.svelte";
+import { createList } from "../../stores/list";
 
-  const { isInitialized } = getContext("items");
   const { open } = getContext("simple-modal");
+  const list = createList(key);
+  const listItemCount = list.getItemCount();
 
-  let liElement: HTMLLIElement;
-
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (event: Event) => {
+    event.stopPropagation();
     if (confirm('Are you sure?')) {
       listsStore.removeList(index);
     }
   }
 
-  const handleEditClick = () => {
+  const handleEditClick = (event: Event) => {
+    event.stopPropagation()
     open(EditListModal, { index });
   }
 
   const handleClick = () => {
-    selectedListStore.select(key);
+    selectedListStore.select(key, label);
   }
-
-  onMount(() => {
-    if (isInitialized()) {
-      liElement.scrollIntoView({ behavior: "smooth" });
-    }
-  })
 </script>
 
-<style>
-  li {
-    max-width: 40rem;
-    margin: 0 auto;
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid grey;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  li:first-of-type {
-    margin-top: 1rem;
-  }
-
-  li:last-of-type {
-    border-bottom: none;
-    margin-bottom: 1rem;
-  }
-
-  .content {
-    width: 100%;
-    margin: 0 0.5rem;
-  }
-
-  .label {
-    font-weight: bold;
-  }
-
-  .controls {
-    display: flex;
-  }
-
-  button {
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    font-size: 1rem;
-  }
-</style>
-
-<li bind:this={liElement} on:click={handleClick}>
-  <div class="content">
-    <div class="label">{label}</div>
-  </div>
-  <div class="controls">
-    <button on:click|stopPropagation={handleEditClick}>
-      <FontAwesomeIcon icon="pencil" />
-    </button>
-    <button on:click|stopPropagation={handleDeleteClick}>
-      <FontAwesomeIcon icon="trash-can" />
-    </button>
-  </div>
-</li>
+<template>
+  <Item on:click={handleClick}>
+    <Text>
+      <PrimaryText>{label}</PrimaryText>
+      <SecondaryText>{listItemCount} item{listItemCount === 1 ? '' : 's'}</SecondaryText>
+    </Text>
+    <Meta class="material-icons">
+      <IconButton class="material-icons" on:click={handleEditClick}>edit</IconButton>
+      <IconButton class="material-icons" on:click={handleDeleteClick}>delete</IconButton>
+    </Meta>
+  </Item>
+</template>

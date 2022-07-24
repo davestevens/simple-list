@@ -8,3 +8,9 @@ export interface IListItem {
   info: string;
   color: string;
 }
+
+
+export interface ISelectedList {
+  key: string;
+  label: string;
+}

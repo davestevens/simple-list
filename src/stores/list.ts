@@ -36,6 +36,11 @@ export const createList = (key: string = LIST_KEY) => {
     removeItem: (index: number): void => {
       update((current) => current.filter((_, i) => i !== index));
     },
+    getItemCount: (): number => {
+      let $current: IListItem[];
+      subscribe($ => $current = $)();
+      return $current.length;
+    },
   };
 };
 
@@ -43,4 +48,3 @@ export const destroyList = (key: string) => {
   const listKey = buildListKey(key);
   localStorage.removeItem(listKey);
 };
-
