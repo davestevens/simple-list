@@ -1,16 +1,16 @@
 {
-  "background_color": "black",
-  "theme_color": "black",
+  "background_color": "#6200ee",
+  "theme_color": "#6200ee",
   "description": "Manage a simple list of items.",
   "display": "standalone",
   "icons": [
     {
-      "src": "./favicon.png",
+      "src": "img/favicon.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./favicon.png",
+      "src": "img/favicon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
