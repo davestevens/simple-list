@@ -23,7 +23,6 @@
   <List
     twoLine
     avatarList
-    singleSelection
   >
     {#each items as item, index}
       <Item {...item} {index} />

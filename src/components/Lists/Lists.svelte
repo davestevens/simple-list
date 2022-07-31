@@ -22,7 +22,6 @@
 <template>
   <SMUIList
     twoLine
-    singleSelection
   >
     {#each lists as list, index}
       <List {...list} {index} />
