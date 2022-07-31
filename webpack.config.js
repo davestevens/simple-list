@@ -1,8 +1,11 @@
 const path = require('path');
 const preprocess = require('svelte-preprocess');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const mode = process.env.NODE_ENV ?? 'development';
 const isProduction = mode === 'production';
@@ -12,7 +15,7 @@ module.exports = {
   entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
+    filename: 'bundle.[hash].js',
   },
   resolve: {
     alias: {
@@ -51,6 +54,8 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.ProgressPlugin(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/index.html'),
     }),
@@ -70,5 +75,18 @@ module.exports = {
   devServer: {
     compress: true,
     port: 9000,
+  },
+  optimization: {
+    minimize: !isProduction,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
+      }),
+    ],
   },
 };
