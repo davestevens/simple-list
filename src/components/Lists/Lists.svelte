@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { onDestroy } from "svelte";
-  import type { IList } from "../../types";
-  import { listsStore } from "../../stores/listsStore";
+  import { onDestroy } from 'svelte';
   import SMUIList, {
     Item,
     Text,
     PrimaryText,
     SecondaryText,
   } from '@smui/list';
-  import List from "./List.svelte";
+  import type { IList } from '../../types';
+  import { listsStore } from '../../stores/listsStore';
+  import List from './List.svelte';
 
   let lists: IList[];
 

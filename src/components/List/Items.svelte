@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { onDestroy } from "svelte";
+  import { onDestroy } from 'svelte';
   import List, {
     Item as SMUIItem,
     Text,
     PrimaryText,
     SecondaryText,
   } from '@smui/list';
-  import type { IListItem } from "../../types";
-  import { getCurrentlySelectedList } from "../../services/currentlySelectedList";
-  import Item from "./Item.svelte";
+  import type { IListItem } from '../../types';
+  import { getCurrentlySelectedList } from '../../services/currentlySelectedList';
+  import Item from './Item.svelte';
 
   let items: IListItem[];
 

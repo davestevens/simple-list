@@ -1,8 +1,9 @@
  <script lang="ts">
-  export let title: string;
   import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar';
   import IconButton from '@smui/icon-button';
-  import { selectedListStore } from "../stores/selectedListStore";
+  import { selectedListStore } from '../stores/selectedListStore';
+  
+  export let title: string;
 
   const handleClick = () => {
     selectedListStore.clear();

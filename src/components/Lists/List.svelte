@@ -1,9 +1,5 @@
 <script lang="ts">
-  export let label: string;
-  export let key: string;
-  export let index: number;
-
-  import { getContext } from "svelte";
+  import { getContext } from 'svelte';
   import {
     Item,
     Meta,
@@ -12,30 +8,36 @@
     SecondaryText,
   } from '@smui/list';
   import IconButton from '@smui/icon-button';
-  import { listsStore } from "../../stores/listsStore";
-  import { selectedListStore } from "../../stores/selectedListStore";
-  import EditListModal from "./EditListModal.svelte";
-import { createList } from "../../stores/list";
+  import { listsStore } from '../../stores/listsStore';
+  import { selectedListStore } from '../../stores/selectedListStore';
+  import EditListModal from './EditListModal.svelte';
+  import { createList } from '../../stores/list';
+  import { ISimpleModalContext } from '../../types';
+  
+  export let label: string;
+  export let key: string;
+  export let index: number;
 
-  const { open } = getContext("simple-modal");
+  const { open } = getContext<ISimpleModalContext>('simple-modal');
   const list = createList(key);
   const listItemCount = list.getItemCount();
 
   const handleDeleteClick = (event: Event) => {
     event.stopPropagation();
-    if (confirm('Are you sure?')) {
+    // eslint-disable-next-line no-alert
+    if (window.confirm('Are you sure?')) {
       listsStore.removeList(index);
     }
-  }
+  };
 
   const handleEditClick = (event: Event) => {
-    event.stopPropagation()
+    event.stopPropagation();
     open(EditListModal, { index });
-  }
+  };
 
   const handleClick = () => {
     selectedListStore.select(key, label);
-  }
+  };
 </script>
 
 <template>

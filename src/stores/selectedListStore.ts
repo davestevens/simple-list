@@ -1,9 +1,9 @@
-import { writable } from "svelte/store";
-import { SELECTED_LIST_KEY } from "../consts";
-import type { ISelectedList } from "../types";
+import { writable } from 'svelte/store';
+import { SELECTED_LIST_KEY } from '../consts';
+import type { ISelectedList } from '../types';
 
-const createSelectedListStore = () => {
-  const initialValue = JSON.parse(localStorage.getItem(SELECTED_LIST_KEY)) || null;
+export const createSelectedListStore = () => {
+  const initialValue = JSON.parse(localStorage.getItem(SELECTED_LIST_KEY)) as ISelectedList || null;
   const { update, subscribe } = writable<ISelectedList | null>(initialValue);
 
   subscribe((val) => {
@@ -17,7 +17,7 @@ const createSelectedListStore = () => {
     },
     clear: (): void => {
       update(() => null);
-    }
+    },
   };
 };
 

@@ -1,19 +1,21 @@
 <script lang="ts">
-  import { getContext } from "svelte";
-  import Dialog, { Title, Content, Actions } from "@smui/dialog";
+  import { getContext } from 'svelte';
+  import Dialog, { Title, Content, Actions } from '@smui/dialog';
   import Textfield from '@smui/textfield';
-  import Button, { Icon, Label } from "@smui/button";
-  import { listsStore } from "../../stores/listsStore";
-  const { close } = getContext("simple-modal");
+  import Button, { Icon, Label } from '@smui/button';
+  import { listsStore } from '../../stores/listsStore';
+  import { ISimpleModalContext } from '../../types';
+  
+  const { close } = getContext<ISimpleModalContext>('simple-modal');
 
-  let label: string = "";
+  let label = '';
 
   const handleSave = () => {
     if (label.trim()) {
       listsStore.addItem(label);
       close();
     }
-  }
+  };
 </script>
 
 <template>

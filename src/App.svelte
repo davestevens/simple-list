@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { onDestroy } from "svelte";
-  import Modal from "svelte-simple-modal";
-  import List from "./views/List.svelte";
-  import Lists from "./views/Lists.svelte";
-  import { selectedListStore } from "./stores/selectedListStore";
-  import { updateCurrentlySelectedList } from "./services/currentlySelectedList";
-  import NavBar from "./components/NavBar.svelte";
-  import type { ISelectedList } from "./types";
+  import { onDestroy } from 'svelte';
+  import Modal from 'svelte-simple-modal';
+  import List from './views/List.svelte';
+  import Lists from './views/Lists.svelte';
+  import { selectedListStore } from './stores/selectedListStore';
+  import { updateCurrentlySelectedList } from './services/currentlySelectedList';
+  import NavBar from './components/NavBar.svelte';
+  import type { ISelectedList } from './types';
 
   let selectedList: ISelectedList | null;
 
@@ -34,7 +34,7 @@
     unstyled={true}
     closeButton={false}
   >
-    <NavBar title={selectedList?.label || "Simple List"} />
+    <NavBar title={selectedList?.label || 'Simple List'} />
     <section>
       {#if selectedList}
         <List />

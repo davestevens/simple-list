@@ -1,29 +1,32 @@
 <script lang="ts">
-  export let index: number;
-
-  import { getContext } from "svelte";
+  import { getContext } from 'svelte';
   import Dialog, { Title, Content, Actions } from '@smui/dialog';
   import Textfield from '@smui/textfield';
   import Button, { Icon, Label } from '@smui/button';
-  import { listsStore } from "../../stores/listsStore";
-  const { close } = getContext("simple-modal");
+  import { listsStore } from '../../stores/listsStore';
+  import { ISimpleModalContext } from '../../types';
+  
+  export let index: number;
+  
+  const { close } = getContext<ISimpleModalContext>('simple-modal');
 
   const item = listsStore.getList(index);
-  let label: string = item.label;
+  let { label } = item;
 
   const handleEdit = () => {
     if (label.trim()) {
       listsStore.updateList(index, label);
       close();
     }
-  }
+  };
 
   const handleDeleteClick = () => {
-    if (confirm('Are you sure?')) {
+    // eslint-disable-next-line no-alert
+    if (window.confirm('Are you sure?')) {
       listsStore.removeList(index);
       close();
     }
-  }
+  };
 </script>
 
 <template>

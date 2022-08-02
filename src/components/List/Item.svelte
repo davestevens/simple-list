@@ -1,10 +1,5 @@
 <script lang="ts">
-  export let label: string;
-  export let info: string;
-  export let color: string;
-  export let index: number;
-
-  import { getContext } from "svelte";
+  import { getContext } from 'svelte';
   import {
     Item,
     Meta,
@@ -13,19 +8,25 @@
     SecondaryText,
   } from '@smui/list';
   import IconButton from '@smui/icon-button';
-  import { getCurrentlySelectedList } from "../../services/currentlySelectedList";
-  import Icon from "../Icon.svelte";
-  import EditItemModal from "./EditItemModal.svelte";
+  import { getCurrentlySelectedList } from '../../services/currentlySelectedList';
+  import Icon from '../Icon.svelte';
+  import EditItemModal from './EditItemModal.svelte';
+  import { ISimpleModalContext } from '../../types';
+  
+  export let label: string;
+  export let info: string;
+  export let color: string;
+  export let index: number;
 
-  const { open } = getContext("simple-modal");
+  const { open } = getContext<ISimpleModalContext>('simple-modal');
 
   const handleDeleteClick = () => {
     getCurrentlySelectedList().removeItem(index);
-  }
+  };
 
   const handleEditClick = () => {
     open(EditItemModal, { index });
-  }
+  };
 </script>
 
   <template>

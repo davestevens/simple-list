@@ -1,8 +1,10 @@
 <script lang="ts">
+  // eslint-disable-next-line import/first
+  import oppositeColor from '../services/oppositeColor';
+
   export let label: string;
   export let color: string;
-  export let marginRight: string = "0";
-  import oppositeColor from "../services/oppositeColor";
+  export let marginRight = '0';
 
   $: foregroundColor = oppositeColor(color);
 </script>

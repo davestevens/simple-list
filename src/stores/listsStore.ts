@@ -1,11 +1,11 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 import { v4 as uuidv4 } from 'uuid';
-import { LISTS_KEY } from "../consts";
-import type { IList } from "../types";
-import { destroyList } from "./list";
+import { LISTS_KEY } from '../consts';
+import type { IList } from '../types';
+import { destroyList } from './list';
 
-const createListsStore = () => {
-  const initialValue = JSON.parse(localStorage.getItem(LISTS_KEY)) || [];
+export const createListsStore = () => {
+  const initialValue = JSON.parse(localStorage.getItem(LISTS_KEY)) as IList[] || [];
   const { update, subscribe } = writable<IList[]>(initialValue);
 
   subscribe((val) => {
@@ -15,18 +15,16 @@ const createListsStore = () => {
   return {
     subscribe,
     addItem: (label: string): void => {
-      update((current) => {
-        return [...current, { label: label.trim(), key: uuidv4() }];
-      });
+      update((current) => [...current, { label: label.trim(), key: uuidv4() }]);
     },
     getList: (index: number): IList => {
       let $current: IList[];
-      subscribe($ => $current = $)();
+      subscribe(($) => { $current = $; })();
       return $current.find((_, i) => i === index);
     },
     getListByKey: (key: string): IList => {
       let $current: IList[];
-      subscribe($ => $current = $)();
+      subscribe(($) => { $current = $; })();
       return $current.find((list) => list.key === key);
     },
     updateList: (index: number, label: string): void => {

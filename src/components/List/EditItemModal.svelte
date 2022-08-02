@@ -1,31 +1,34 @@
 <script lang="ts">
-  export let index: number;
-
-  import { getContext } from "svelte";
+  import { getContext } from 'svelte';
   import Dialog, { Title, Content, Actions } from '@smui/dialog';
   import Textfield from '@smui/textfield';
   import Button, { Icon, Label } from '@smui/button';
-  import { getCurrentlySelectedList } from "../../services/currentlySelectedList";
-  const { close } = getContext("simple-modal");
+  import { getCurrentlySelectedList } from '../../services/currentlySelectedList';
+  import { ISimpleModalContext } from '../../types';
+  
+  export let index: number;
+  
+  const { close } = getContext<ISimpleModalContext>('simple-modal');
 
   const list = getCurrentlySelectedList();
   const item = list.getItem(index);
-  let label: string = item.label;
-  let info: string = item.info;
+  let { label } = item;
+  let { info } = item;
 
   const handleEdit = () => {
     if (label.trim()) {
       list.updateItem(index, label, info);
       close();
     }
-  }
+  };
 
   const handleDeleteClick = () => {
-    if (confirm('Are you sure?')) {
+    // eslint-disable-next-line no-alert
+    if (window.confirm('Are you sure?')) {
       list.removeItem(index);
       close();
     }
-  }
+  };
 </script>
 
 <template>

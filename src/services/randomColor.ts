@@ -1,11 +1,11 @@
-const range: string = "ABCDEF0123456789";
+const range = 'ABCDEF0123456789';
 
 export default (): string => {
-    let hex: string = "#";
+  let hex = '#';
 
-    for (var i = 0; i < 6; i++ ) {
-      hex += range.charAt(Math.floor(Math.random() * range.length));
-    }
+  for (let i = 0; i < 6; i += 1) {
+    hex += range.charAt(Math.floor(Math.random() * range.length));
+  }
 
-    return hex;
-}
+  return hex;
+};

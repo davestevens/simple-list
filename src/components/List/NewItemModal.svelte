@@ -1,20 +1,22 @@
 <script lang="ts">
-  import { getContext } from "svelte";
-  import Dialog, { Title, Content, Actions } from "@smui/dialog";
+  import { getContext } from 'svelte';
+  import Dialog, { Title, Content, Actions } from '@smui/dialog';
   import Textfield from '@smui/textfield';
-  import Button, { Icon, Label } from "@smui/button";
-  import { getCurrentlySelectedList } from "../../services/currentlySelectedList";
-  const { close } = getContext("simple-modal");
+  import Button, { Icon, Label } from '@smui/button';
+  import { getCurrentlySelectedList } from '../../services/currentlySelectedList';
+  import { ISimpleModalContext } from '../../types';
+  
+  const { close } = getContext<ISimpleModalContext>('simple-modal');
 
-  let label: string = "";
-  let info: string = "";
+  let label = '';
+  let info = '';
 
   const handleSave = () => {
     if (label.trim()) {
       getCurrentlySelectedList().addItem(label, info);
       close();
     }
-  }
+  };
 </script>
 
 <template>

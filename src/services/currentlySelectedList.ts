@@ -1,6 +1,7 @@
-import { createList } from "../stores/list";
+import { createList } from '../stores/list';
+import type { ICreateList } from '../types';
 
-let currentlySelectedList;
+let currentlySelectedList: ICreateList | null;
 
 export const updateCurrentlySelectedList = (key: string) => {
   if (key) {
@@ -8,8 +9,6 @@ export const updateCurrentlySelectedList = (key: string) => {
   } else {
     currentlySelectedList = null;
   }
-}
+};
 
-export const getCurrentlySelectedList = () => {
-  return currentlySelectedList;
-}
+export const getCurrentlySelectedList = (): ICreateList | null => currentlySelectedList;

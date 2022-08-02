@@ -1,8 +1,10 @@
 <script lang="ts">
   import Fab, { Icon } from '@smui/fab';
-  import { getContext } from "svelte";
-  import NewItemModal from "./NewItemModal.svelte";
-  const { open } = getContext("simple-modal");
+  import { getContext } from 'svelte';
+  import NewItemModal from './NewItemModal.svelte';
+  import { ISimpleModalContext } from '../../types';
+  
+  const { open } = getContext<ISimpleModalContext>('simple-modal');
 
   const handleClick = () => open(NewItemModal);
 </script>
