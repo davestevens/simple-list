@@ -17,7 +17,7 @@ module.exports = {
     project: ['./tsconfig.json'],
     extraFileExtensions: ['.svelte', '.json'],
   },
-  ignorePatterns: ['package.json', 'package-lock.json'],
+  ignorePatterns: ['package.json', 'package-lock.json', 'webpack.config.*'],
   plugins: [
     'svelte3',
     '@typescript-eslint',
