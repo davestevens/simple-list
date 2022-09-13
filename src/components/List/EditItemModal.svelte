@@ -22,7 +22,8 @@
     }
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (event: Event) => {
+    event.preventDefault();
     // eslint-disable-next-line no-alert
     if (window.confirm('Are you sure?')) {
       list.removeItem(index);
